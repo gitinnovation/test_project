@@ -1,0 +1,3 @@
+[0129/105730.591:ERROR:file_io.cc(134)] WriteFile: The pipe is being closed. (0xE8)
+[0217/141524.119:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0217/141524.192:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
