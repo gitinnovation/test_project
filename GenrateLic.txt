@@ -1,0 +1,130 @@
+public void GenerateLic(Properties P, WebDriver driver,String TC_No, String ServerID, String ERPCode,String ETECCount,String Implemented,String ContentETEC, String HardwareETEC, String ServiceETEC, String AMCETEC, String ExpectedResult, String errortype,int rn) throws Exception
+	 {
+		//EditERP(ERP,LastQtr,Expry,CustomerStatus,ActiveExpiryStatus,ERPLicenseCategory,ContentEtec,lastUsageCheck,LastUsageDate);
+		   String ActualResult="Null";
+		   String RowNO=Integer.toString(rn);
+		   rn= rn +1 ;
+
+		    driver.findElement(By.linkText("School Info")).click();
+		   String Schoolinfo= driver.getCurrentUrl();
+		   if(Schoolinfo.equals(P.getProperty("url")+"/Support/SchoolMaster.aspx")) {
+			   System.out.println("Passed  : Navigated to School info List");
+			 //  testresultdata.put("3", new Object[] {2d, "navigate to school Info or School list", "School List is  fetched","Pass"});
+		   }
+		   else { 
+			   System.out.println("Failed  : School List are not fetched out.");
+			//   testresultdata.put("3", new Object[] {2d, "navigate to school Info or School list", "School List is not fetched","Fail"});
+			   driver.close();
+		   }
+		   
+		   new Select(driver.findElement(By.id(P.getProperty("DDSrchBySchlID")))).selectByVisibleText("School ID");
+		   Thread.sleep(500);
+		   
+		
+		   enterText(driver,P.getProperty("txtSrchSchl"), ServerID);
+		   Thread.sleep(500);
+		   
+		   clickBtn(driver, P.getProperty("btnSrchSchl"));
+		   Thread.sleep(500);
+		   
+		   
+		   driver.findElement(By.id(P.getProperty("lnkManageKey"))).click();
+		    
+		    String LicenseURL= driver.getCurrentUrl();
+		    if(LicenseURL.equals(P.getProperty("url")+"/Support/DownloadEncryptionKey.aspx?ID="+ServerID))
+		    {  
+		      	driver.findElement(By.linkText("Mark as Invalid")).click();
+		      	enterText(driver,P.getProperty("txtLicInvalid"), "test");
+		      	clickBtn(driver, P.getProperty("BtnLicInvalid"));
+			    
+		    	System.out.println("License Invalid page");
+		    	LicenseURL =driver.getCurrentUrl();
+		    }
+		    if(LicenseURL.equals(P.getProperty("url")+"/Support/newGenerateLicenceKey_Mod.aspx?ID="+ServerID+"&&opcode=l"))
+		   // {
+		    	//Support/newGenerateLicenceKey_Mod.aspx?ID=2010022400002094&&opcode=l
+		    //	System.out.println("License Generation page");
+		  
+		    	//String QA_Status=null;   BtnGenLicKey
+		    	                                                       
+		    //	Boolean IsEnableLicGenBtn = driver.findElements(By.id(P.getProperty("BtnGenLicKey"))).size() > 0 ;
+		    //	if(IsEnableLicGenBtn) {
+		    		
+		    		//Boolean IsERPContractLevel = driver.findElement(By.id(P.getProperty("lblERPContrct"))).isDisplayed();      //.size() > 0 ; 
+		    	//	System.out.println("IsERPContractLevel : "+IsERPContractLevel);
+		    		//if(IsERPContractLevel)
+		    	//	{ 
+		    			//System.out.println("ERPContractLevel : "+IsERPContractLevel);
+		    		//	System.out.println("License Allowed : But ERP Contract Is Expired");
+		    			//ActualResult  = driver.findElement(By.id(P.getProperty("lblERPContrct"))).getText();
+		    		
+		    		//	System.out.println("Alert Message : "+ActualResult);
+		    			
+		    			 // if(ActualResult.equals(ExpectedResult))
+		    				//  QA_Status="PASS";
+		    			 // else 
+		    			//	  QA_Status="FAIL";
+		    				  
+		    			//TestResult(RowNO,TC_No,ERPCode,ServerID,ETECCount,Implemented,ContentETEC,HardwareETEC,ServiceETEC,AMCETEC,ExpectedResult,ActualResult);
+		    			//  Assert.assertEquals(ActualResult, ExpectedResult);
+		    			
+		    		//}
+		    	//	else {
+		    			
+		    		//OS Selection
+		    	   // new Select(driver.findElement(By.id(P.getProperty("DD_OSSelection")))).selectByVisibleText("Windows");
+		    	    
+		    	    //Force Reset
+		    	   // clickBtn(driver, P.getProperty("rdBtnForceReset"));
+			      
+
+			        clickBtn(driver, P.getProperty("BtnGenLicKey"));
+		    		Thread.sleep(1000);
+		    		
+		    		//clickBtn(driver, P.getProperty("schoolinfotab"));
+		    		//Thread.sleep(5000);
+		    		
+		    		//Boolean IsContentEtec = driver.findElement(By.id(P.getProperty("lblContentEtec"))).isDisplayed();  
+		    		//if(IsContentEtec)
+		    			/*{
+		    			
+		    		    ActualResult  = driver.findElement(By.xpath(P.getProperty("lblContentEtec"))).getText();
+		    		    System.out.println("Alert Message : "+ActualResult);
+		    		    TestResult(RowNO,TC_No,ERPCode,ServerID,ETECCount,Implemented,ContentETEC,HardwareETEC,ServiceETEC,AMCETEC,ExpectedResult,ActualResult);
+		    		}
+		    		else */
+		    		{
+		    			//ctl00_ContentPlaceHolder1_hlDownload
+		    			//Boolean IsLicExportbtn = driver.findElements(By.id("ctl00_ContentPlaceHolder1_Licencegenerate1_btnUpload")).size() > 0;
+		    			Boolean IsLicExportbtn = driver.findElements(By.id(P.getProperty("BtnExportLicKey"))).size() > 0;
+		    			if(IsLicExportbtn)
+		    			{
+		    				System.out.println("License Generated Successfully........");
+		    				ActualResult="License Generated Successfully........";
+		    				TestResult(RowNO,TC_No,ERPCode,ServerID,ETECCount,Implemented,ContentETEC,HardwareETEC,ServiceETEC,AMCETEC,ExpectedResult,ActualResult);
+		    			}
+		    			else
+		    			{
+		    				System.out.println("Timeout issue");
+		    				ActualResult="Timeout Issue";
+		    				TestResult(RowNO,TC_No,ERPCode,ServerID,ETECCount,Implemented,ContentETEC,HardwareETEC,ServiceETEC,AMCETEC,ExpectedResult,ActualResult);
+		    			}
+		    				
+		    		}
+		    	 
+		    		}
+		    		
+		    	//	}
+		    		
+		    		
+		    		
+		    	//else 
+		    	{	
+		    		System.out.println("License not allowed to the school");
+		    		                                                    
+		    	 //   ActualResult =driver.findElement(By.xpath(P.getProperty("lblLicRenewal"))).getText();
+		    	  //  System.out.println("Alert Message : "+ActualResult);
+
+		    	//  TestResult(RowNO,TC_No,ERPCode,ServerID,ETECCount,Implemented,ContentETEC,HardwareETEC,ServiceETEC,AMCETEC,ExpectedResult,ActualResult);  
+
+		    	}
