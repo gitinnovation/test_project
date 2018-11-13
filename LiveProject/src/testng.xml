@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Everjobs Suite">
+ 
+ <test name="Page Object Model Project">
+ <classes>
+ <class name="com.ef.test.tetsBase" /> 
+ <class name="com.ef.test.Tests" /> 
+ </classes> 
+ </test> 
+ 
+</suite> <!-- Suite -->
