@@ -39,6 +39,23 @@ public class ctsRegression extends ctsBase{
 			}
 	
 	@Test(priority=3)
+	public void cTeacher() throws Exception{
+		createTeacher cTeacher = PageFactory.initElements(driver, createTeacher.class);
+		cTeacher.btnlinks();
+		cTeacher.setUsr_ID("demo_qa");
+		cTeacher.setUsr_Name("demouser");
+		cTeacher.setUsr_Password("admin@1");
+		//cPrincipal.selectClass();	
+		cTeacher.select_Board();
+		cStudent.select_CBSE();
+		cStudent.select_Next();
+		cStudent.select_Classes();
+		cStudent.selectStep_Next();
+		cStudent.select_Subjects();
+		cStudent.Finish();
+		}
+	
+	@Test(priority=3)
 	public void cStudent(String sName,String sClass, String sSection, String sRemoteno, String sRollno) throws Exception
 	{
 		createStudents cStudent = PageFactory.initElements(driver, createStudents.class);
